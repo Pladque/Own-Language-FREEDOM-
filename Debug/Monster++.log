@@ -1,0 +1,11 @@
+﻿  Lexer.cpp
+D:\Projects\Cpp Projects\Monster++\Monster++\Lexer.cpp(51,34): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+D:\Projects\Cpp Projects\Monster++\Monster++\Lexer.cpp(58,34): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+  Monster++.cpp
+  Nodes.cpp
+D:\Projects\Cpp Projects\Monster++\Monster++\Nodes.cpp(9,12): error C2512: "Token": niedostępny odpowiedni konstruktor domyślny
+D:\Projects\Cpp Projects\Monster++\Monster++\Token.h(6,7): message : zobacz deklarację „Token”
+D:\Projects\Cpp Projects\Monster++\Monster++\Nodes.cpp(30,11): error C2512: "NumberNode": niedostępny odpowiedni konstruktor domyślny
+D:\Projects\Cpp Projects\Monster++\Monster++\Nodes.cpp(4,7): message : zobacz deklarację „NumberNode”
+  Token.cpp
+  Generowanie kodu...
