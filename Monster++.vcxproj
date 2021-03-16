@@ -139,17 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BinOpNode.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="Lexer.cpp" />
     <ClCompile Include="Monster++.cpp" />
-    <ClCompile Include="Nodes.cpp" />
+    <ClCompile Include="NumberNode.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="Token.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BinOpNode.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="Lexer.h" />
-    <ClInclude Include="Nodes.h" />
+    <ClInclude Include="NumberNode.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Token.h" />
   </ItemGroup>

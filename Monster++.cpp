@@ -5,7 +5,7 @@
 #include "Token.h"
 #include "Lexer.h"
 
-//https://www.youtube.com/watch?v=Eythq9848Fg&ab_channel=CodePulse  - 11:49
+//https://www.youtube.com/watch?v=RriZ4q4z9gU&t=622s&ab_channel=CodePulse  -- 5:40
 
 std::queue < Token* > Tokens;
 
@@ -42,35 +42,3 @@ int main()
     } while (text != "q");
     
 }
-
-/*
-
-std::string operation = "";
-
-    do
-    {
-        for (int i = 0; i < operation.size(); i++)
-        {
-            if (operation[i] >= '0' and operation[i] <= '9')
-            {
-                Token* token = new Token("INT", std::string(1, operation[i]));
-                Tokens.push(token);
-            }
-            else if (operation[i] =='+')
-            {
-                Token* token = new Token("PLUS");
-                Tokens.push(token);
-            }
-        }
-
-
-        
-
-        std::cout << "monster>>";
-        std::cin >> operation;
-
-    } while (operation != "quit");
-
-    //delete[] Tokens;
-    
-    */
