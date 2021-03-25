@@ -1,9 +1,10 @@
 ﻿#include <iostream>
 #include <unordered_map>
-#include <queue>
+#include <deque>
 #include <string>
 #include "Token.h"
 #include "Lexer.h"
+#include "Parser.h"
 
 //https://www.youtube.com/watch?v=RriZ4q4z9gU&t=622s&ab_channel=CodePulse  -- 5:40
 
@@ -14,6 +15,7 @@ std::queue < Token > run(std::string fn, std::string text)
 {
     auto lexer = Lexer(text, fn);
     auto tokens = lexer.make_tokens();
+    //auto parser = Parser()
 
     return tokens;
 }
@@ -22,7 +24,8 @@ std::queue < Token > run(std::string fn, std::string text)
 int main()
 {
     std::string text = "";
-    std::queue < Token > results = run("<stdin>", text);
+    std::deque < Token > results = run("<stdin>", text);
+    auto parser = Parser(results);
 
     text = "2+2 \n 3*3";
     do
@@ -39,6 +42,8 @@ int main()
 
         std::cout << "bestia>>";
         std::getline(std::cin, text);
+
+
     } while (text != "q");
     
 }

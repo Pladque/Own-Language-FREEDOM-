@@ -20,7 +20,7 @@ void Lexer::InitializeOperationSymbolsHashMap()
 	this->OperationSymbols['/'] = this->TT_DIV;
 
 	this->OperationSymbols['('] = this->TT_LPAREN;
-	this->OperationSymbols['/'] = this->TT_RPAREN;
+	this->OperationSymbols[')'] = this->TT_RPAREN;
 }
 
 void Lexer::InitializeDigidsHashMap()

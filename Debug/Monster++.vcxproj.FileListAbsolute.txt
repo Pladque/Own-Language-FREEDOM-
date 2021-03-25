@@ -1,0 +1,2 @@
+D:\Projects\CppProjects\Own-Language\Debug\Monster++.exe
+D:\Projects\CppProjects\Own-Language\Debug\Monster++.pdb
