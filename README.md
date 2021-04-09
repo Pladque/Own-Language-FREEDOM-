@@ -64,7 +64,7 @@ Expected output:
 ### Arthmetic Operators :   
 > +, -, *, /, ^
 ### Logic Operators:
-> >, >=, <, <=, ==
+> \>, >=, <, <=, ==
 
 ## Changing keywords:
 ```
