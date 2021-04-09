@@ -61,8 +61,10 @@ Expected output:
 3
 ```
 ## Important: Every element should be seperated by 2 spaces (or single tab)
-### Arthmetic Operators :   +, -, *, /, ^
-### Logic Operators: >, >=, <, <=, ==
+### Arthmetic Operators :   
+> +, -, *, /, ^
+### Logic Operators:
+> >, >=, <, <=, ==
 
 ## Changing keywords:
 ```
