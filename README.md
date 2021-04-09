@@ -34,11 +34,12 @@ var  variable  =  15  ;
 var  variable   ;
 ```
 Value by words:
+
 *if you are familiar with rockstar leanguge- in mine it works the same*
 ```
 var  variable  =   whats  the  value  of   it?   ;
 ```
-That varaible will be equal 53523 (whats has 5 letters, the has 3, and so on...)
+That varaible will be equal 53523 ("whats" has 5 letters, "the" has 3, and so on...)
 
 ### If and loops:
 ```
