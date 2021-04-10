@@ -1,5 +1,5 @@
 # Own-Language
-## Freedom is a dynamic typed programming languge whose main feature are changable keywords
+## Freedom is a dynamic typed programming languge whose main feature is abbility to change keywords in while program is running
 ### With Freedom you can recreate languages like Rockstar or ArnoldC
 
 ## Features:
@@ -9,7 +9,7 @@
 - [X] If statemant
 - [X] dynamic keywords
 - [X] Stringlike wariables
-- [ ] Arrays
+
 
 ## Usage:
 Just run main.cpp and you are ready to go!
