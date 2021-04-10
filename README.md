@@ -56,7 +56,7 @@ my first words  and my other
 ```
 With changing value it works same as with numbers, For example:
 ```
-another variable  ~~  new value of thos string  
+another variable  ~~  new value of this string  
 ```
 
 ### If and loops:
