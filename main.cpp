@@ -4,11 +4,7 @@
 #include <string>
 #include <fstream>
 #include <tuple>
-// TODO:
-//		-strings
-//		-lists
-//		-faster whiles and ifs
-//		-clear variables
+
 
 std::tuple<std::string, std::string> __GET_OVERPARSER_FUNCS__(std::string input, Core* core, std::deque < Order >* orders);
 

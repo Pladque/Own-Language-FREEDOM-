@@ -1,0 +1,20 @@
+var  my counter  =  0
+var  RANGE  =  100
+ 
+while  my counter  <  RANGE
+	var  result  ~~ 
+	if  my counter   %  3  ==  0
+		result  ~~  fizz
+	stopif
+
+	if  my counter  %  5  ==  0
+		result  ~~  result  buzz
+	stopif
+
+	
+	my counter
+	result
+	
+	my counter  =  my counter  +  1
+	
+stop
