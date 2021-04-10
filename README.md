@@ -66,7 +66,8 @@ if variable  >   word
    my variable is bigger then word     //   indentation is just for estetic, you dont have to style code that way
 stopif
 ```
-(code aboec will print " my variable is bigger then word")
+(code above will print " my variable is bigger then word")
+
 *You dont have to use ";" if you are running code from file and you have new lines*
 ```
 var  variable   =   9
