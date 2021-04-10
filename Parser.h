@@ -27,10 +27,11 @@ public:
 	Order interpretLine(std::deque < Token >* tokens, Lexer* lexer);
 	bool LogicValueOf(std::deque < Token >* tokens, Lexer* lexer);
 
-	const std::string  __DEFAULT_VALUE__ = "420";
+	const std::string  __DEFAULT_NUM_VALUE__ = "0";
+	const std::string  __DEFAULT_STR_VALUE__ = "";
 	
 	Token curr_tok;
-	short PriorMax = 3;
+	const short __MAX_PRIOR__ = 4;
 	int tok_idx;
 
 	Token advance();

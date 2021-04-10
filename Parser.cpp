@@ -2,14 +2,31 @@
 
 #include <math.h>
 #include <stack>
+#include<string>
+
+
+bool is_number(const std::string s)
+{
+	std::string copied_str = "";
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (s[i] != '.')
+			copied_str += s[i];
+	}
+	return !copied_str.empty() && std::find_if(copied_str.begin(),
+		copied_str.end(), [](unsigned char c) { return !std::isdigit(c); }) == copied_str.end();
+}
+
+
 
 void Parser::InitializeOperatorsPriorityHashMap()
 {
 	this->operatorsPriority["PLUS"] = 1;
 	this->operatorsPriority["MINUS"] = 1;
-	this->operatorsPriority["MUL"] = 2;
-	this->operatorsPriority["DIV"] = 2;
-	this->operatorsPriority["POW"] = 3;
+	this->operatorsPriority["MOD"] = 2;
+	this->operatorsPriority["MUL"] = 3;
+	this->operatorsPriority["DIV"] = 3;
+	this->operatorsPriority["POW"] = 4;
 }
 
 Parser::Parser(std::deque < Token >* tokens)
@@ -52,6 +69,12 @@ double Parser::SplitSubSetsAndDoMath(short curr_prior, std::deque < Token >* tok
 		return this->CalcExpr(curr_prior, *tokensLeft) / this->CalcExpr(curr_prior, *tokensRight);
 	else if (mathOperator->Type == "POW")
 		return pow(this->CalcExpr(curr_prior, *tokensLeft), this->CalcExpr(curr_prior, *tokensRight));
+	else if (mathOperator->Type == "MOD")
+	{
+		int x1 = int(this->CalcExpr(curr_prior, *tokensLeft));
+		int x2 = int(this->CalcExpr(curr_prior, *tokensRight));
+		return int(this->CalcExpr(curr_prior, *tokensLeft)) % int(this->CalcExpr(curr_prior, *tokensRight));
+	}
 
 	return 0;
 }
@@ -64,9 +87,9 @@ int SetSubTokensMiddleAndGetParanthesisBeginIndex(std::deque < Token > tokens, i
 	for (paranthesisBeginIndex = curr_iterator - 1; !(tokens[paranthesisBeginIndex].Type == "LPAREN" && parathesisCounter == 0);
 		paranthesisBeginIndex--)
 	{
-		if (tokens[paranthesisBeginIndex].Type == "LPAREN")			
+		if (tokens[paranthesisBeginIndex].Type == "LPAREN")
 			parathesisCounter++;
-		else if (tokens[paranthesisBeginIndex].Type == "RPAREN")	
+		else if (tokens[paranthesisBeginIndex].Type == "RPAREN")
 			parathesisCounter--;
 
 		if ((tokens[paranthesisBeginIndex].Type == "LPAREN" && parathesisCounter == 1) || paranthesisBeginIndex < 0)
@@ -86,13 +109,13 @@ bool Parser::LogicValueOf(std::deque < Token >* tokens, Lexer* lexer)
 
 	Expresions.push_back(std::deque < Token >());
 	short iterator = 0;
-	
+
 	for (int i = 0; i < tokens->size(); i++)
 	{
 		//these are logic operators
 		if (tokens->at(i).Type == lexer->TT_LESSEQ || tokens->at(i).Type == lexer->TT_LESS
 			|| tokens->at(i).Type == lexer->TT_MORE || tokens->at(i).Type == lexer->TT_MOREEQ
-			|| tokens->at(i).Type == lexer->TT_2EQ)
+			|| tokens->at(i).Type == lexer->TT_2EQ || tokens->at(i).Type == lexer->TT_NOTEQ)
 		{
 			iterator++;
 			operators.push(tokens->at(i));
@@ -128,6 +151,10 @@ bool Parser::LogicValueOf(std::deque < Token >* tokens, Lexer* lexer)
 		{
 			check = (CalcExpr(1, Expresions[iterator - 1]) == CalcExpr(1, Expresions[iterator]));
 		}
+		else if (temp.Type == lexer->TT_NOTEQ)
+		{
+			check = (CalcExpr(1, Expresions[iterator - 1]) != CalcExpr(1, Expresions[iterator]));
+		}
 
 		if (!check)
 			return false;
@@ -160,12 +187,12 @@ Order Parser::interpretLine(std::deque < Token >* tokens, Lexer* lexer)
 	if (order.type != Order::Type::skip)
 		if (startToken.Type == lexer->TT_FLOAT || startToken.Type == lexer->TT_INT || startToken.Type == lexer->TT_VARNAME)
 		{
-			if (tokens->size() >= 2 && tokens->at(1).Type == lexer->TT_EQ) // if there changing value of already delcared value;
+			if (tokens->size() >= 2 && (tokens->at(1).Type == lexer->TT_EQ || (tokens->at(1).Type == lexer->TT_STREQ) ))// if there changing value of already delcared value;
 			{
 				order.type = Order::Type::revalue;
 				order.tokens = *tokens;
 			}
-			else if (tokens->size() >=2)		//bc for only variable I want to print its value
+			else if (tokens->size() >= 2)		//bc for only variable I want to print its value
 			{
 				//if there is operator, then it is term, if not, print
 				bool foundInOperators = false;
@@ -186,7 +213,10 @@ Order Parser::interpretLine(std::deque < Token >* tokens, Lexer* lexer)
 			}
 			else
 			{
-				order.type = Order::Type::term;
+				if (is_number(tokens->at(0).Value))
+					order.type = Order::Type::term;
+				else
+					order.type = Order::Type::text;
 				order.tokens = *tokens;
 			}
 		}
@@ -258,9 +288,38 @@ std::deque < Order > Parser::parse(std::deque < Token > tokens)
 	for (int i = 0; i < orders.size(); i++)
 	{
 		if (orders[i].type == Order::Type::term)
-			std::cout << CalcExpr(1, orders[i].tokens) << std::endl;
+		{
+			try
+			{
+				std::cout << CalcExpr(1, orders[i].tokens) << std::endl;
+			}
+			catch (int error)
+			{
+				switch (error)
+				{
+				case 301:
+					std::cout << "You cant add strings and numbers!" << std::endl;
+					break;
+				case 101:
+					std::cout << "Unexpected error, check yout input" << std::endl;
+					break;
+				}
+				std::cout << "Error: " << error << std::endl;
+			}
+
+		}
+		else if (orders[i].type == Order::Type::text)
+		{
+			for (int j = 0; j < orders[i].tokens.size(); j++)
+			{
+				std::cout << this->Variables[orders[i].tokens[j].Value].Value;
+			}
+			std::cout << std::endl;
+		}
 		else if (orders[i].type == Order::Type::print)
-			orders[i].printTokens();
+		{
+			orders[i].printTokens(this->Variables);
+		}
 		else if (orders[i].type == Order::Type::if_statement)
 		{
 			if (!LogicValueOf(&orders[i].tokens, &lexer))
@@ -279,16 +338,23 @@ std::deque < Order > Parser::parse(std::deque < Token > tokens)
 		}
 		else if (orders[i].type == Order::Type::revalue)
 		{
+
 			std::deque < Token > subTokensExpr;
 
 			bool foundVoid = false;
 			bool foundOperator = false;
-			for (int j = 2; j < orders[i].tokens.size(); j++)
+			bool foundString = false;
+			for (int j = 2; j < orders[i].tokens.size(); j++) //i = 3 bc i want start with token after =
 			{
 				subTokensExpr.push_back(orders[i].tokens.at(j));
 				if (orders[i].tokens.at(j).Type == lexer.TT_VOID)
 				{
 					foundVoid = true;
+				}
+				else if (orders[i].tokens.at(j).Type == lexer.TT_VARNAME &&
+					!is_number(this->Variables[orders[i].tokens.at(j).Value].Value))
+				{
+					foundString = true;
 				}
 				else
 				{
@@ -300,26 +366,48 @@ std::deque < Order > Parser::parse(std::deque < Token > tokens)
 							break;
 						}
 					}
-
 				}
 			}
 
-			bool ifExpr = (!foundVoid || foundOperator);
+			bool ifExpr = (!foundVoid || foundOperator) && !foundString;
 
+			//if it is expresion, then call expresion
 			if (ifExpr)
-				this->Variables[orders[i].tokens.at(0).Value] = Token(orders[i].tokens.at(1).Value, std::to_string(this->CalcExpr(1, subTokensExpr)));
-			else  //else convert that voids to number
+				this->Variables[orders[i].tokens.at(0).Value] = Token(orders[i].tokens.at(0).Value, std::to_string(this->CalcExpr(1, subTokensExpr)));
+			//else convert that voids to number
+			else //if(!foundString)
 			{
-				int newValue = 0;
-				int pow = 1;
-				for (int i = subTokensExpr.size() - 1; i >= 0; i--)
+				if (orders[i].tokens[1].Type == lexer.TT_EQ)
 				{
-					newValue += subTokensExpr[i].Value.length() * pow;
-					pow *= 10;
-				}
 
-				this->Variables[orders[i].tokens.at(0).Value] = Token(orders[i].tokens.at(0).Value, std::to_string(newValue));
+					int newValue = 0;
+					int pow = 1;
+
+					//std::string tempTestingHowStringWillWork;
+					for (int i = subTokensExpr.size() - 1; i >= 0; i--)
+					{
+						newValue += subTokensExpr[i].Value.length() * pow;
+						pow *= 10;
+						//tempTestingHowStringWillWork += subTokensExpr[i].Value;
+					}
+					this->Variables[orders[i].tokens.at(0).Value] = Token(orders[i].tokens.at(0).Value, std::to_string(newValue));
+					//this->Variables[orders[i].tokens.at(1).Value] = Token(orders[i].tokens.at(1).Value, tempTestingHowStringWillWork);
+				}
+				else if (orders[i].tokens[1].Type == lexer.TT_STREQ)
+				{
+					std::string newValue;
+					for (int i = 0; i < subTokensExpr.size(); i++)
+					{
+						if (subTokensExpr[i].Type != lexer.TT_VARNAME)
+							newValue += subTokensExpr[i].Value + " ";
+						else
+							newValue += this->Variables[subTokensExpr[i].Value].Value + " ";
+					}
+					this->Variables[orders[i].tokens.at(0).Value] = Token(orders[i].tokens.at(0).Value, newValue);
+				}
 			}
+
+
 		}
 		else if (orders[i].type == Order::Type::declar)
 		{
@@ -329,12 +417,18 @@ std::deque < Order > Parser::parse(std::deque < Token > tokens)
 
 				bool foundVoid = false;
 				bool foundOperator = false;
+				bool foundString = false;
 				for (int j = 3; j < orders[i].tokens.size(); j++) //i = 3 bc i want start with token after =
 				{
 					subTokensExpr.push_back(orders[i].tokens.at(j));
 					if (orders[i].tokens.at(j).Type == lexer.TT_VOID)
 					{
 						foundVoid = true;
+					}
+					else if (orders[i].tokens.at(j).Type == lexer.TT_VARNAME &&
+						!is_number(this->Variables[orders[i].tokens.at(j).Value].Value))
+					{
+						foundString = true;
 					}
 					else
 					{
@@ -346,31 +440,52 @@ std::deque < Order > Parser::parse(std::deque < Token > tokens)
 								break;
 							}
 						}
-
 					}
 				}
 
-				bool ifExpr = (!foundVoid || foundOperator);
+				bool ifExpr = (!foundVoid || foundOperator) && !foundString;
 
 				//if it is expresion, then call expresion
 				if (ifExpr)
 					this->Variables[orders[i].tokens.at(1).Value] = Token(orders[i].tokens.at(1).Value, std::to_string(this->CalcExpr(1, subTokensExpr)));
 				//else convert that voids to number
-				else
+				else //if(!foundString)
 				{
-					int newValue = 0;
-					int pow = 1;
-					for (int i = subTokensExpr.size() - 1; i >= 0; i--)
+					if (orders[i].tokens[2].Type == lexer.TT_EQ)
 					{
-						newValue += subTokensExpr[i].Value.length() * pow;
-						pow *= 10;
-					}
 
-					this->Variables[orders[i].tokens.at(1).Value] = Token(orders[i].tokens.at(1).Value, std::to_string(newValue));
+						int newValue = 0;
+						int pow = 1;
+
+						//std::string tempTestingHowStringWillWork;
+						for (int i = subTokensExpr.size() - 1; i >= 0; i--)
+						{
+							newValue += subTokensExpr[i].Value.length() * pow;
+							pow *= 10;
+							//tempTestingHowStringWillWork += subTokensExpr[i].Value;
+						}
+						this->Variables[orders[i].tokens.at(1).Value] = Token(orders[i].tokens.at(1).Value, std::to_string(newValue));
+						//this->Variables[orders[i].tokens.at(1).Value] = Token(orders[i].tokens.at(1).Value, tempTestingHowStringWillWork);
+					}
+					else if (orders[i].tokens[2].Type == lexer.TT_STREQ)
+					{
+						std::string newValue;
+						for (int i = 0; i < subTokensExpr.size(); i++)
+						{
+							if (subTokensExpr[i].Type != lexer.TT_VARNAME)
+								newValue += subTokensExpr[i].Value + " ";
+							else
+								newValue += this->Variables[subTokensExpr[i].Value].Value + " ";
+						}
+						this->Variables[orders[i].tokens.at(1).Value] = Token(orders[i].tokens.at(1).Value, newValue);
+					}
 				}
+
 			}
-			else  //if not declaration then give default value
-				this->Variables[orders[i].tokens.at(1).Value] = Token(orders[i].tokens.at(1).Value, __DEFAULT_VALUE__);
+			else if (orders[i].tokens[2].Type == lexer.TT_STREQ)		//for fe. "var  str  ~~ " I will give str __DEFAULT_STR_VALUE__
+				this->Variables[orders[i].tokens.at(1).Value] = Token(orders[i].tokens.at(1).Value, __DEFAULT_STR_VALUE__);
+			else
+				this->Variables[orders[i].tokens.at(1).Value] = Token(orders[i].tokens.at(1).Value, __DEFAULT_NUM_VALUE__);
 
 		}
 		else if (orders[i].type == Order::Type::loop_start)
@@ -416,18 +531,27 @@ double Parser::CalcExpr(short curr_prior, std::deque < Token > tokens)
 		Lexer lexer("", "");
 		if (tokens.front().Type == lexer.TT_NEWVAR || tokens.front().Type == lexer.TT_VARNAME)
 		{
+			if (!is_number(this->Variables[tokens.front().Value].Value))
+			{
+				std::string XD = this->Variables[tokens.front().Value].Value;
+				bool test = is_number("7.00");
+
+				throw 301;
+			}
 			tokens.front() = this->Variables[tokens.front().Value];
 		}
 		else if (tokens.front().Type == lexer.TT_VOID)
 		{
 			tokens.front() = Token(lexer.TT_FLOAT, std::to_string(tokens.front().Value.length()));
 		}
+
 		return std::stod(tokens.front().Value);
+
 	}
 	else if (tokens.size() == 0)
 		return 0;
 
-	while (curr_prior <= this->PriorMax)
+	while (curr_prior <= this->__MAX_PRIOR__)
 	{
 		std::deque < Token > tokensSubsetLeft;
 		std::deque < Token > tokensSubsetRight;
@@ -488,7 +612,7 @@ double Parser::CalcExpr(short curr_prior, std::deque < Token > tokens)
 
 	int pow = 1;
 	double ReturnValue = 0;
-	Lexer lexer("","");
+	Lexer lexer("", "");
 	for (int i = tokens.size() - 1; i >= 0; i--)
 	{
 		if (tokens[i].Type == lexer.TT_FLOAT || tokens[i].Type == lexer.TT_INT)
@@ -496,7 +620,7 @@ double Parser::CalcExpr(short curr_prior, std::deque < Token > tokens)
 			ReturnValue += std::stod(tokens[i].Value) * pow;
 		}
 		else
-			ReturnValue += (double) tokens[i].Value.length() * pow;
+			ReturnValue += (double)tokens[i].Value.length() * pow;
 
 		pow *= 10;
 	}

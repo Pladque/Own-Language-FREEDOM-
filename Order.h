@@ -5,6 +5,7 @@
 #ifndef ORDER_H
 #define ORDER_H
 
+
 #pragma once
 #pragma once
 class Order
@@ -12,7 +13,7 @@ class Order
 
 public:
 	std::deque < Token > tokens;
-	enum Type { term, declar, loop_start, loop_stop, if_statement, if_stop, print, printValues, revalue, revalueSTR, skip};
+	enum Type { term, text, declar, loop_start, loop_stop, if_statement, if_stop, print, printValues, revalue, revalueSTR, skip};
 	Type type;
 
 	std::string GetTypeSTR()
@@ -40,11 +41,19 @@ public:
 		}
 	}
 
-	void printTokens()
+
+
+
+	void printTokens(std::unordered_map<std::string, Token> variables)
 	{
+		Lexer lexer("", "");
 		for (int i = 0; i < tokens.size(); i++)
 		{
-			if (tokens[i].Value != "None")
+			if (tokens[i].Type == lexer.TT_VARNAME)
+			{
+				std::cout << variables[tokens[i].Value].Value;
+			}
+			else if (tokens[i].Value != "None")
 				std::cout << tokens[i].Value << ' ';
 			else
 			{
