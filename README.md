@@ -12,7 +12,8 @@
 
 
 ## Usage:
-Just run main.cpp and you are ready to go!
+Put everythinh to one the same dir, 
+run main.cpp and you are ready to go!
 
 ## Syntax:
 ### Build-in debug commands:
