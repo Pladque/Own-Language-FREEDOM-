@@ -1,5 +1,5 @@
 # Own-Language
-## Freedom is a dynamic typed programming languge whose main feature is abbility to change keywords in while program is running
+## Freedom is a dynamic typed programming languge whose main feature is abbility to change keywords while program is running
 ### With Freedom you can recreate languages like Rockstar or ArnoldC
 
 ## Features:
