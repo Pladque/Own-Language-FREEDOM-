@@ -103,7 +103,7 @@ var  counter  =  0
 var  RANGE  =  100
  
 while  counter  <  RANGE
-	var  result  ~~ 
+	var  result  ~~ 		\\   it will set result as a empty string, without "~~" it would be number (0)
 	if  counter   %  3  ==  0
 		result  ~~  fizz
 	stopif
