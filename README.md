@@ -84,14 +84,14 @@ Expected output:
 ### Arthmetic Operators :   
 > +, -, *, /, ^, %
 ### Logic Operators:
-> \>, >=, <, <=, ==
+> \>, >=, <, <=, ==, !=
 
 ## Changing keywords:
 ```
 +  ===  plus  ;
 [old keyword]  ===   [new keyword]
 ```
-Old keyword will be deleted from operators, you cab even change "===" operator
+Old keyword will be deleted from operators, you can even change "===" operator
 ```
 ===  ===  multiple words operator
 ```
