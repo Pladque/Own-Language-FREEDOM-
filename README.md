@@ -8,7 +8,7 @@
 - [X] Loops
 - [X] If statemant
 - [X] dynamic keywords
-- [ ] Stringlike wariables
+- [X] Stringlike wariables
 - [ ] Arrays
 
 ## Usage:
@@ -41,6 +41,23 @@ var  variable  =   whats  the  value  of   it?   ;
 ```
 That varaible will be equal 53523 ("whats" has 5 letters, "the" has 3, and so on...)
 
+You can also declar string variable:
+```
+var  some word variable  ~~  my first words
+var  another variable  ~~  some word variable  and my other
+some word
+another variable
+```
+Expected output:
+```
+my first words
+my first words  and my other
+```
+With changing value it works same as with numbers, For example:
+```
+another variable  ~~  new value of thos string  
+```
+
 ### If and loops:
 ```
 var variable  =  9
@@ -62,7 +79,7 @@ Expected output:
 ```
 ## Important: Every element should be seperated by 2 spaces (or single tab)
 ### Arthmetic Operators :   
-> +, -, *, /, ^
+> +, -, *, /, ^, %
 ### Logic Operators:
 > \>, >=, <, <=, ==
 
@@ -76,3 +93,27 @@ Old keyword will be deleted from operators, you cab even change "===" operator
 ===  ===  multiple words operator
 ```
 Here I changed operator === to "multiple words operator"
+# EXAMPLE CODE:
+## FizzBuzz (basic)
+```
+var  counter  =  0
+var  RANGE  =  100
+ 
+while  counter  <  RANGE
+	var  result  ~~ 
+	if  counter   %  3  ==  0
+		result  ~~  fizz
+	stopif
+
+	if  counter  %  5  ==  0
+		result  ~~  result  buzz
+	stopif
+
+	
+	counter
+	result
+	
+	counter  =  counter  +  1
+	
+stop
+```
