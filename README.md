@@ -20,8 +20,8 @@ run main.cpp and you are ready to go!
 - "ordrs" - print last interpreted orders
 - "opnf -n -rn a.in" - open file (-n for name, -rn for run, a.in is a name of file)
 - "toks" - print tokens
-- actvars - print active variables
-- rstrt - restarts Core, recommended if you want run same program twice (otherwise variables, changed keywords will not be cleared)
+- "actvars" - print active variables
+- "rstrt" - restarts Core, recommended if you want run same program twice (otherwise variables, changed keywords will not be cleared)
 ### Printing sth:
 To print any word you can just write it in the code (in new line or between " ; ")
 If that word is not a variable, it will be just print to the console
