@@ -123,6 +123,12 @@ stop
 
 ## There is fizzbuzz but it looks like poorly wirten poem
 ```
+===  ===  means
+=  means  are
+~~  means  are empty
+var  means  my
+while  means  as long as
+<  means  loses with
 %  means  there is a place for
 -  means  without
 ===  means  for sure
