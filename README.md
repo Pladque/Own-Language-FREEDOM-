@@ -26,7 +26,7 @@ run main.cpp and you are ready to go!
 To print any word you can just write it in the code (in new line or between " ; ")
 If that word is not a variable, it will be just print to the console
 ### Comments:
-To commant some code, just use "//  my commant"
+To commant some code, just use "//  my comment)
 (2 spaces after "//" are required"
 ### declaring variable:
 Basic declaration:
@@ -36,7 +36,7 @@ var  variable   ;
 ```
 Value by words:
 
-*if you are familiar with rockstar leanguge- in mine it works the same*
+*if you are familiar with rockstar language- in mine it works the same*
 ```
 var  variable  =   whats  the  value  of   it?   ;
 ```
