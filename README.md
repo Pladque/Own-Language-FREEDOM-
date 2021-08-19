@@ -8,7 +8,7 @@
 - [X] Loops
 - [X] If statemant
 - [X] dynamic keywords
-- [X] Stringlike wariables
+- [X] Stringlike variables
 
 
 ## Usage:
