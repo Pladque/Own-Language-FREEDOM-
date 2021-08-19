@@ -80,6 +80,14 @@ Expected output:
 ```
 3
 ```
+Why? Because this code in other languge would loos like this
+```
+int variable = 9;
+while variable > 4{
+	variable = variable - 3; 	//  hey has been translated to 3 in that context
+}
+cout<<variable;
+```
 ## Important: Every element should be seperated by 2 spaces (or single tab)
 ### Arthmetic Operators :   
 > +, -, *, /, ^, %
