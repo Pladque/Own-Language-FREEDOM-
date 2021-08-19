@@ -26,7 +26,7 @@ run main.cpp and you are ready to go!
 To print any word you can just write it in the code (in new line or between " ; ")
 If that word is not a variable, it will be just print to the console
 ### Comments:
-To commant some code, just use "//  my comment)
+To comment some code, just use "//  my comment)
 (2 spaces after "//" are required"
 ### declaring variable:
 Basic declaration:
