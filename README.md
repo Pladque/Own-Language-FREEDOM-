@@ -11,7 +11,7 @@ completly unique language just with few lines of code.
 
 
 ## Features:
-
+- [X] math interpreter
 - [X] Variables
 - [X] Loops
 - [X] If statemant
