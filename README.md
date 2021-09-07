@@ -32,7 +32,7 @@ run main.cpp and you are ready to go!
 - "rstrt" - restarts Core, recommended if you want run same program twice (otherwise variables, changed keywords will not be cleared)
 ### Printing sth:
 To print any word you can just write it in the code (in new line or between " ; ")
-If that word is not a variable, it will be just print to the console
+If that word is not a variable, it will be printed to the console
 ### Comments:
 To comment some code, just use "//  my comment)
 (2 spaces after "//" are required"
