@@ -88,7 +88,7 @@ Expected output:
 ```
 3
 ```
-Why? Because this code in other languge would loos like this
+Why? Because this code in other languge would looks like this
 ```
 int variable = 9;
 while variable > 4{
