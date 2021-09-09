@@ -20,8 +20,14 @@ completly unique language just with few lines of code.
 
 
 ## How to run:
-Put everything to one the same dir, 
-run main.cpp and you are ready to go!
+In folder with "FreedomLanguage" folder:
+
+```
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=DEBUG
+cmake --build .
+```
 
 ## Syntax:
 ### Build-in debug commands:
