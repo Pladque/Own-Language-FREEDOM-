@@ -2,12 +2,22 @@
 ## Freedom is a dynamic typed programming languge whose main feature is abbility to change keywords while program is running
 ### With Freedom you can recreate languages like Rockstar or ArnoldC
 
-## Whats the purpose?:
+## What's the purpose?:
 That language has no real usage. If you change keywords it makes it hard to understand.
 However, that wasnt my goal. FREEDOM is language designed for fun. I also consider it as a 
 great learning expirience.
 Through the development I focused on fact, that theoretically you can make other,
 completly unique language just with few lines of code.
+
+## How to run:
+In folder with "FreedomLanguage" folder:
+
+```
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=DEBUG
+cmake --build .
+```
 
 
 ## Features:
@@ -19,15 +29,7 @@ completly unique language just with few lines of code.
 - [X] Stringlike variables
 
 
-## How to run:
-In folder with "FreedomLanguage" folder:
 
-```
-mkdir build
-cd build
-cmake .. -DCMAKE_BUILD_TYPE=DEBUG
-cmake --build .
-```
 
 ## Syntax:
 ### Build-in debug commands:
