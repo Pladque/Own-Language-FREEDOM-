@@ -21,13 +21,20 @@ cmake --build .
 
 
 ## Features:
-- [X] math interpreter
-- [X] Variables
-- [X] Loops
-- [X] If statemant
-- [X] dynamic keywords
-- [X] Stringlike variables
+* math interpreter
+* Variables
+* Loops
+* If statemant
+* dynamic keywords
+* Stringlike variables
 
+## math interpreter:
+![Alt Text](https://github.com/Pladque/Own-Language-FREEDOM-/blob/main/Examples/calculator.gif)
+# Important: Every element should be seperated by 2 spaces (or single tab)
+### Arthmetic Operators :   
+> +, -, *, /, ^, %
+### Logic Operators:
+> \>, >=, <, <=, ==, !=
 
 
 
@@ -82,6 +89,7 @@ if variable  >   word
    my variable is bigger then word     //   indentation is just for estetic, you dont have to style code that way
 stopif
 ```
+![Alt Text](https://github.com/Pladque/Own-Language-FREEDOM-/blob/main/Examples/showIf.gif)
 (code above will print " my variable is bigger then word")
 
 *You dont have to use ";" if you are running code from file and you have new lines*
@@ -104,11 +112,7 @@ while variable > 4{
 }
 cout<<variable;
 ```
-## Important: Every element should be seperated by 2 spaces (or single tab)
-### Arthmetic Operators :   
-> +, -, *, /, ^, %
-### Logic Operators:
-> \>, >=, <, <=, ==, !=
+
 
 ## Changing keywords:
 ```
