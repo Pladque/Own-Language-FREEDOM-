@@ -10,7 +10,6 @@ Through the development I focused on fact, that theoretically you can make other
 completly unique language just with few lines of code.
 
 ## How to run:
-In folder with "FreedomLanguage" folder:
 
 ```
 mkdir build
